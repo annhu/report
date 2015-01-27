@@ -1,0 +1,28 @@
+yarn jar /opt/cloudera/parcels/CDH-5.3.0-1.cdh5.3.0.p0.30/lib/hadoop-mapreduce/hadoop-streaming-*.jar \
+-D mapred.job.name="Count Dictionary" \
+-D mapred.map.tasks=4 \
+-D mapred.reduce.tasks=1 \
+-files CreateDicMap.py,CreateDicReduce.py,dic_all.txt \
+-input /user/input/total_ngram_19.txt \
+-output /user/output/test \
+-mapper CreateDicMap.py \
+-reducer CreateDicReduce.py
+
+yarn jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
+-D mapred.job.name="Count Dictionary" \
+-D mapred.map.tasks=5 \
+-D mapred.reduce.task=0 \
+-files CreateDicMap1.py,dic_all/tainan_culture_name.txt \
+-input /project/gramdata/ \
+-output /project/dicresult1/ \
+-mapper CreateDicMap1.py
+
+
+yarn jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
+-D mapred.job.name="Count Dictionary" \
+-D mapred.map.tasks=5 \
+-files CreateDicMap.py,CreateDicReduce.py,dic_all/tainan_culture_name.txt,dic_all/tainan_mountain_name.txt,dic_all/tainan_nature_name.txt,dic_all/tainan_hotspring_name.txt,dic_all/tainan_resort_name.txt,dic_all/tainan_geography_name.txt,dic_all/Food_dic_no.txt,dic_all/Food_dic_yes.txt \
+-input /project/gramdata/xuite_txt_file_ngram/ \
+-output /project/dicresult/ \
+-mapper CreateDicMap.py \
+-reducer CreateDicReduce.py
